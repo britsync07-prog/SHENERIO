@@ -1,0 +1,127 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 345 6% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 345 6% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 345 6% 8%;
+    --primary: 345 6% 8%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 345 45% 95%;
+    --secondary-foreground: 345 6% 8%;
+    --muted: 345 20% 96%;
+    --muted-foreground: 345 4% 42%;
+    --accent: 345 60% 92%;
+    --accent-foreground: 345 6% 8%;
+    --destructive: 0 72% 45%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 345 10% 90%;
+    --input: 345 10% 85%;
+    --ring: 345 6% 8%;
+    --radius: 0rem;
+
+    /* SHENERIO brand tokens */
+    --blush: 345 64% 92%;          /* translucent baby pink, solid form */
+    --blush-soft: 345 55% 96%;
+    --ink: 345 6% 8%;
+    --ink-soft: 345 4% 38%;
+  }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
+  }
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    background-color: #fff;
+    color: hsl(var(--ink));
+    font-family: 'Jost', 'Segoe UI', sans-serif;
+    font-size: 16px;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+  ::selection {
+    background: hsl(var(--blush));
+    color: hsl(var(--ink));
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+  }
+  .font-body {
+    font-family: 'Jost', 'Segoe UI', sans-serif;
+  }
+  .tracking-luxe {
+    letter-spacing: 0.32em;
+  }
+  .tracking-luxe-sm {
+    letter-spacing: 0.18em;
+  }
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* ------- brand motion ------- */
+@keyframes heroKenBurns {
+  from { transform: scale(1.0); }
+  to   { transform: scale(1.06); }
+}
+@keyframes silkDrift {
+  0%   { background-position: 0% 40%; }
+  50%  { background-position: 100% 60%; }
+  100% { background-position: 0% 40%; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(18px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.hero-slide-img {
+  animation: heroKenBurns 14s ease-in-out infinite alternate;
+}
+
+.silk-motion {
+  background:
+    radial-gradient(ellipse 60% 45% at 20% 30%, rgba(249, 213, 222, 0.9), transparent 65%),
+    radial-gradient(ellipse 55% 50% at 80% 25%, rgba(244, 190, 203, 0.65), transparent 60%),
+    radial-gradient(ellipse 70% 55% at 55% 85%, rgba(252, 231, 236, 0.95), transparent 70%),
+    radial-gradient(ellipse 40% 40% at 85% 80%, rgba(238, 176, 191, 0.45), transparent 60%),
+    #ffffff;
+  background-size: 220% 220%;
+  animation: silkDrift 18s ease-in-out infinite;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-slide-img, .silk-motion { animation: none; }
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+}
+
+/* thin elegant scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: hsl(var(--blush-soft)); }
+::-webkit-scrollbar-thumb { background: hsl(var(--ink)); }
