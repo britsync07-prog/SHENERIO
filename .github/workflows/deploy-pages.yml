@@ -21,8 +21,11 @@ jobs:
         working-directory: app
       - run: npm run build
         working-directory: app
+      - name: Configure Cloudflare credentials
+        run: |
+          mkdir -p "$HOME/.config/.wrangler/config"
+          echo "${{ secrets.CLOUDFLARE_WRANGLER_CONFIG_B64 }}" | base64 --decode > "$HOME/.config/.wrangler/config/default.toml"
       - uses: cloudflare/wrangler-action@v3
         with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy app/dist --project-name shenerio --branch main
